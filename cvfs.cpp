@@ -207,6 +207,11 @@ void DisplayManPage(char Name[20])
 		printf("About: Used to read data from a file\n");
 		printf("Usage: read [file descriptor] [number of bytes to be read]\n");
 	}
+	else if(strcmp("stat", Name) == 0)
+	{
+		printf("About: Used to display file metadata\n");
+		printf("Usage: stat [filename]\n");
+	}
 	else
 	{
 		printf("No manual entry for %s", Name);
@@ -591,4 +596,62 @@ int ReadFile
 	ureaobj.UFDT[fd]->ReadOffset = ureaobj.UFDT[fd]->ReadOffset + size;
 
 	return size;
+}
+
+int StatFile(char *name) // accept name and display file metadata
+{
+	PINODE temp = head;
+
+	// if name not given
+	if(NULL == name)
+	{
+		return ERR_INVALID_PARAMETER;
+	}
+
+	// search empty inode
+	while(temp != NULL)
+	{
+		if(strcmp(name, temp->FileName) == 0)
+		{
+			break;
+		}
+
+		temp = temp->next;
+	}
+
+	if(temp == NULL)
+	{
+		return ERR_FILE_NOT_EXIST;
+	}
+
+	printf("\n----- File Information -----\n");
+    printf("File Name        : %s\n", temp->FileName);
+    printf("Inode Number     : %d\n", temp->InodeNumber);
+    printf("File Size        : %d\n", temp->FileSize);
+    printf("Actual File Size : %d\n", temp->ActualFileSize);
+    printf("Reference Count  : %d\n", temp->ReferenceCount);
+
+	if(temp->FileType == 1)
+	{
+		printf("File Type        : Regular File\n");
+	}
+
+    printf("Permission       : ");
+
+    if(temp->Permission == 1)
+    {
+		printf("r--\n");
+	}
+    else if(temp->Permission == 2)
+    {
+		printf("-w-\n");
+	}
+    else if(temp->Permission == 3)
+    {
+		printf("rw-\n");
+	}
+
+    printf("----------------------------\n");
+
+	return EXECUTE_SUCCESS;
 }

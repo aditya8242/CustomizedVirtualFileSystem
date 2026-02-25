@@ -70,7 +70,6 @@ int main()
 			{
 				DisplayManPage(Command[1]);
 			}
-
 			// [CVFS]$ unlink demo.txt
 			else if(strcmp("unlink", Command[0]) == 0)
 			{
@@ -118,6 +117,19 @@ int main()
 				else
 				{
 					printf("%d bytes gets successfully written.\n", iRet);
+				}
+			}
+			else if(strcmp("stat", Command[0]) == 0)
+			{
+				iRet = StatFile(Command[1]);
+
+				if(iRet == ERR_INVALID_PARAMETER)
+				{
+					printf("Error: Invalid parameter\n");
+				}
+				else if(iRet == ERR_FILE_NOT_EXIST)
+				{
+					printf("Error: File not found\n");
 				}
 			}
 			else
