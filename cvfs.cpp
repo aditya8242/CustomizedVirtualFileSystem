@@ -32,7 +32,7 @@ void InitializeUAREA()
 		ureaobj.UFDT[i] = NULL;
 	}
 
-	printf("Marvellous CVFS: UAREA gets initialized successfully!\n");
+	printf("CVFS: UAREA gets initialized successfully!\n");
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -49,7 +49,7 @@ void InitializeSuperBlock()
 	superobj.TotalInodes = MAXINODE;
 	superobj.FreeInodes = MAXINODE;
 
-	printf("Marvellous CVFS: Super block gets initialized successfully!\n");
+	printf("CVFS: Super block gets initialized successfully!\n");
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -94,7 +94,7 @@ void CreateDILB()
 		}
 	}
 
-	printf("Marvellous CVFS: DILB created successfully!\n");
+	printf("CVFS: DILB created successfully!\n");
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -109,7 +109,7 @@ void CreateDILB()
 
 void StartAuxillaryDataInitialization()
 {
-	strcpy(bootobj.Information, "Booting process of Marvellous Infosystems CVFS is done!\n");
+	strcpy(bootobj.Information, "Booting process of CVFS is done!\n");
 	
 	printf("%s", bootobj.Information);
 
@@ -119,7 +119,7 @@ void StartAuxillaryDataInitialization()
 
 	InitializeUAREA();
 
-	printf("Marvellous CVFS: Auxillary data initialized successfully!\n");
+	printf("CVFS: Auxillary data initialized successfully!\n");
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -134,7 +134,7 @@ void StartAuxillaryDataInitialization()
 void DisplayHelp()
 {
 	printf("---------------------------------------------------------\n");
-	printf("-----------------Marvellous CVFS help--------------------\n");
+	printf("-----------------------CVFS help-------------------------\n");
 	printf("---------------------------------------------------------\n");
 
 	printf("man:    It is used to display the manual page\n");
@@ -180,6 +180,32 @@ void DisplayManPage(char Name[20])
 	{
 		printf("About: Used to clear the shell\n");
 		printf("Usage: clear\n");
+	}
+	else if(strcmp("help", Name) == 0)
+	{
+		printf("About: Used to display help page\n");
+		printf("Usage: help\n");
+	}
+	else if(strcmp("unlink", Name) == 0)
+	{
+		printf("About: Used to unlink/delete a file\n");
+		printf("Usage: unlink [filename]\n");
+	}
+	else if(strcmp("write", Name) == 0)
+	{
+		printf("About: Used to write data in file\n");
+		printf("Usage: write [fd] (file descriptor)\n");
+	}
+	else if(strcmp("creat", Name) == 0)
+	{
+		printf("About: Used to create a new file\n");
+		printf("Usage: creat [filename] [permissions] (rwx)\n");
+		printf("Returns file descriptor. Important for other operations.\n");
+	}
+	else if(strcmp("read", Name) == 0)
+	{
+		printf("About: Used to read data from a file\n");
+		printf("Usage: read [file descriptor] [number of bytes to be read]\n");
 	}
 	else
 	{
@@ -348,7 +374,7 @@ void lsFile()
 	PINODE temp = head;
 
 	printf("---------------------------------------------------------\n");
-	printf("------------Marvellous CVFS files information------------\n");
+	printf("------------------CVFS files information-----------------\n");
 	printf("---------------------------------------------------------\n");
 
 	// todo add header

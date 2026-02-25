@@ -15,7 +15,7 @@ int main()
 	StartAuxillaryDataInitialization();
 
 	printf("---------------------------------------------------------\n");
-	printf("----------Marvellous CVFS started successfully!----------\n");
+	printf("---------------CVFS started successfully!----------------\n");
 	printf("---------------------------------------------------------\n");
 
 	// infinite listening shell
@@ -25,7 +25,7 @@ int main()
 
 		strcpy(str,"");
 
-		printf("\n[Marvellous CVFS]$ ");
+		printf("\n[CVFS]$ ");
 		fgets(str, sizeof(str), stdin);
 		
 		iCount = sscanf(str, "%s %s %s %s %s", Command[0], Command[1], Command[2], Command[3], Command[4]);
@@ -34,7 +34,7 @@ int main()
 
 		if(iCount == 1)
 		{
-			// [Marvellous CVFS]$ exit
+			// [CVFS]$ exit
 			if(strcmp("exit", Command[0]) == 0)
 			{
 				printf("Exiting application...\n");
@@ -42,17 +42,17 @@ int main()
 				
 				break;
 			}
-			// [Marvellous CVFS]$ ls
+			// [CVFS]$ ls
 			else if(strcmp("ls", Command[0]) == 0)
 			{
 				lsFile();
 			}
-			// [Marvellous CVFS]$ help
+			// [CVFS]$ help
 			else if(strcmp("help", Command[0]) == 0)
 			{
 				DisplayHelp();
 			}
-			// [Marvellous CVFS]$ clear
+			// [CVFS]$ clear
 			else if(strcmp("clear", Command[0]) == 0)
 			{
 				// conditional preprocessing
@@ -65,14 +65,14 @@ int main()
 		}	// end of if 1
 		else if(iCount == 2)
 		{
-			// [Marvellous CVFS]$ man ls
+			// [CVFS]$ man ls
 			if(strcmp("man", Command[0]) == 0)
 			{
 				DisplayManPage(Command[1]);
 			}
 
-			// [Marvellous CVFS]$ unlink demo.txt
-			if(strcmp("unlink", Command[0]) == 0)
+			// [CVFS]$ unlink demo.txt
+			else if(strcmp("unlink", Command[0]) == 0)
 			{
 				iRet = UnlinkFile(Command[1]);
 
@@ -91,7 +91,7 @@ int main()
 					printf("File successfully deleted.\n");
 				}
 			}
-			//	[Marvellous CVFS]$ write 2
+			//	[CVFS]$ write 2
 			else if(strcmp("write", Command[0]) == 0)
 			{
 				printf("Enter the data that you want to write: ");
@@ -128,7 +128,7 @@ int main()
 		}	// end of else if 2
 		else if(iCount == 3)
 		{
-			// [Marvellous CVFS]$ creat Ganesh.txt 3
+			// [CVFS]$ creat Ganesh.txt 3
 			if(strcmp("creat", Command[0]) == 0)
 			{
 				iRet = CreateFile(Command[1], atoi(Command[2]));
@@ -157,7 +157,7 @@ int main()
 
 				printf("File gets successfully created with FD %d\n", iRet);
 			}
-			//	[Marvellous CVFS]$ read 3 10
+			//	[CVFS]$ read 3 10
 			else if(strcmp("read", Command[0]) == 0)
 			{
 				EmptyBuffer = (char *)malloc(sizeof(atoi(Command[2])));	// might need for \0
