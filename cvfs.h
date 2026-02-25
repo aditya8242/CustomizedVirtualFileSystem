@@ -22,3 +22,4 @@ void lsFile();
 int UnlinkFile(char *);
 int WriteFile(int,char *,int);
 int ReadFile(int,char *,int);
+int StatFile(char *);
